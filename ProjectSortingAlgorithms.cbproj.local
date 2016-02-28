@@ -1,0 +1,23 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<BorlandProject>
+	<Transactions>
+    <Transaction>1899-12-30 00:00:00.000.917,C:\Users\Rafael\Documents\RAD Studio\Projects\Unit2.cpp=D:\ProjektyCpp\Sorting_Algorithms\SortingAlgorithms.cpp</Transaction>
+    <Transaction>1899-12-30 00:00:00.000.856,=C:\Users\Rafael\Documents\RAD Studio\Projects\Unit2.cpp</Transaction>
+    <Transaction>1899-12-30 00:00:00.000.917,C:\Users\Rafael\Documents\RAD Studio\Projects\Unit2.h=D:\ProjektyCpp\Sorting_Algorithms\SortingAlgorithms.h</Transaction>
+    <Transaction>1899-12-30 00:00:00.000.690,C:\Users\Rafael\Documents\RAD Studio\Projects\Project2.cbproj=D:\ProjektyCpp\Sorting_Algorithms\ProjectSortingAlgorithms.cbproj</Transaction>
+    <Transaction>1899-12-30 00:00:00.000.675,C:\Users\Rafael\Documents\RAD Studio\Projects\Project2PCH1.h=D:\ProjektyCpp\Sorting_Algorithms\Sorting.h</Transaction>
+    <Transaction>1899-12-30 00:00:00.000.933,D:\ProjektyCpp\Sorting_Algorithms\File1.h=D:\ProjektyCpp\Sorting_Algorithms\Table.h</Transaction>
+    <Transaction>1899-12-30 00:00:00.000.171,=D:\ProjektyCpp\Sorting_Algorithms\File1.h</Transaction>
+    <Transaction>1899-12-30 00:00:00.000.835,=C:\Users\Rafael\Documents\RAD Studio\Projects\Project2PCH1.h</Transaction>
+    <Transaction>1899-12-30 00:00:00.000.917,C:\Users\Rafael\Documents\RAD Studio\Projects\Unit2.dfm=D:\ProjektyCpp\Sorting_Algorithms\SortingAlgorithms.dfm</Transaction>
+  </Transactions>
+	<ProjectSortOrder AutoSort="0" SortType="0">
+    <File Path="ProjectSortingAlgorithms.cpp"/>
+    <File Path="Sorting.h"/>
+    <File Path="Table.h"/>
+    <File Path="SortingAlgorithms.cpp"/>
+    <File Path="SortingAlgorithms.cpp"/>
+    <File Path="SortingAlgorithms.dfm"/>
+    <File Path="SortingAlgorithms.h"/>
+  </ProjectSortOrder>
+</BorlandProject>
