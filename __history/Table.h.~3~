@@ -1,0 +1,83 @@
+#ifndef TABLE_H
+#define TABLE_H
+
+#include <iostream>
+#include <cstring>  // memcpy
+#include <vector>
+#include <string>
+#include <sstream>
+#include <algorithm>    // std::sort
+using namespace std;
+
+class Table {
+	int size;
+	int* tab;
+
+public:
+	Table(int size, const int* t)
+		: size(size), tab((int*)memcpy(new int[size], t, size*sizeof(int))) {
+	}
+
+	Table(const Table& t) : size(t.size),
+		tab((int*)memcpy(new int[size], t.tab, size*sizeof(int))) {
+	}
+
+	~Table() {
+		delete[]tab;
+	}
+
+	Table& operator++();
+	Table operator++(int);
+	void getTab(const char* nap);
+	AnsiString Table::TableToString();
+	void Table::ArrayToVector();
+	void BubbleSort();
+	void Table::sort();
+};
+
+Table& Table:: operator++() {
+	for (int i = 0; i < size; ++i)
+		++tab[i];
+	return *this;
+}
+
+Table Table:: operator++(int) {
+	Table t(*this);
+	++*this;
+	return t;
+}
+
+void Table::getTab(const char* nap) {
+	cout << nap;
+	for (int i = 0; i < size; i++)
+		cout << tab[i] << " ";
+	cout << endl;
+}
+
+AnsiString Table::TableToString() {
+	AnsiString sorted = "";
+	for (int i = 0; i < size; i++) {
+		sorted += IntToStr(tab[i]);
+		if (i != size - 1) {
+			sorted += ",";
+		}
+	}
+	return sorted;
+}
+
+void Table::ArrayToVector() {
+	std::vector<int> v(tab, tab + sizeof tab / sizeof tab[0]);
+}
+
+void Table::BubbleSort() {
+	for (int i = 0; i < size; i++) {
+		for (int j = 0; j < size - 1; j++) {
+			if (tab[j] > tab[j + 1])
+				swap(tab[j], tab[j + 1]);
+		}
+	}
+}
+
+
+
+#endif

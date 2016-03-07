@@ -40,10 +40,15 @@ __published:	// IDE-managed Components
 	TMenuItem *File1;
 	TMenuItem *About1;
 	TMenuItem *Exit1;
+	TButton *bClearSorting;
 	void __fastcall Exit1Click(TObject *Sender);
 	void __fastcall btnStartClick(TObject *Sender);
 	void __fastcall bSaveTimeClick(TObject *Sender);
 	void __fastcall bClearClick(TObject *Sender);
+	void __fastcall bClearSortingClick(TObject *Sender);
+	void __fastcall About1Click(TObject *Sender);
+	void __fastcall ListBoxTimeDblClick(TObject *Sender);
+
 private:	// User declarations
 public:		// User declarations
 	__fastcall TForm2(TComponent* Owner);
