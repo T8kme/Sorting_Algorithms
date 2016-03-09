@@ -4427,7 +4427,7 @@ object Form2: TForm2
     Top = 93
     Width = 113
     Height = 17
-    Caption = 'Przez scalanie'
+    Caption = 'Merge sort'
     Enabled = False
     TabOrder = 4
   end
@@ -4436,7 +4436,7 @@ object Form2: TForm2
     Top = 116
     Width = 113
     Height = 17
-    Caption = 'Przez zliczanie'
+    Caption = 'Counting sort'
     Enabled = False
     TabOrder = 5
   end
@@ -4445,7 +4445,7 @@ object Form2: TForm2
     Top = 139
     Width = 113
     Height = 17
-    Caption = 'Kube'#322'kiem'
+    Caption = 'Bucket sort'
     Enabled = False
     TabOrder = 6
   end
@@ -4454,7 +4454,7 @@ object Form2: TForm2
     Top = 162
     Width = 113
     Height = 17
-    Caption = 'Metod'#261' pozycyjn'#261
+    Caption = 'Radix sort'
     Enabled = False
     TabOrder = 7
   end
@@ -4463,7 +4463,7 @@ object Form2: TForm2
     Top = 185
     Width = 113
     Height = 17
-    Caption = 'Przez wybieranie'
+    Caption = 'Selection sort'
     Enabled = False
     TabOrder = 8
   end
@@ -4472,7 +4472,7 @@ object Form2: TForm2
     Top = 208
     Width = 113
     Height = 17
-    Caption = 'Metod'#261' Shella'
+    Caption = 'Shell sort'
     TabOrder = 9
   end
   object RadioButton10: TRadioButton
@@ -4489,7 +4489,7 @@ object Form2: TForm2
     Top = 254
     Width = 113
     Height = 17
-    Caption = 'Sortowanie kopcem'
+    Caption = 'Heap sort'
     Enabled = False
     TabOrder = 11
   end
@@ -4579,7 +4579,7 @@ object Form2: TForm2
       Top = 12
       Width = 135
       Height = 149
-      Hint = 'Double-clip copy to the clipboard'
+      Hint = 'Double-click copy to the clipboard'
       ItemHeight = 13
       ParentShowHint = False
       ShowHint = True

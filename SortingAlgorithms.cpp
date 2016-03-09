@@ -54,7 +54,7 @@ void __fastcall TForm2::Exit1Click(TObject *Sender) {
 // ---------------------------------------------------------------------------
 void __fastcall TForm2::btnStartClick(TObject *Sender) {
 
-	//try {
+	try {
 		string input = UnicodeToString(EditUnsorted->Text);
 
 		vector<long>output;
@@ -134,10 +134,9 @@ void __fastcall TForm2::btnStartClick(TObject *Sender) {
 		labelTime->Caption = FloatToStrF(elapsed_secs, ffFixed, 2, 4) + " \u00B5s";
 		EditSorted->Text = s_array.TableToString();
 	}
-
-	//catch (...) {
-	//}
-//}
+	catch (...) {
+	}
+}
 
 // ---------------------------------------------------------------------------
 void __fastcall TForm2::bSaveTimeClick(TObject *Sender) {
@@ -184,7 +183,7 @@ void __fastcall TForm2::ListBoxTimeDblClick(TObject *Sender) {
 		SetClipboardData(CF_TEXT, h);
 		CloseClipboard();
 
-		ShowMessage("Copied " + SelectedItemCaption + " to clipboard");
+		ShowMessage("Copied \"" + SelectedItemCaption + "\" to clipboard");
 	}
 	catch (...) {
 
