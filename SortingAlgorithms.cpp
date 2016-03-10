@@ -53,7 +53,6 @@ void __fastcall TForm2::Exit1Click(TObject *Sender) {
 
 // ---------------------------------------------------------------------------
 void __fastcall TForm2::btnStartClick(TObject *Sender) {
-
 	try {
 		string input = UnicodeToString(EditUnsorted->Text);
 
@@ -90,7 +89,7 @@ void __fastcall TForm2::btnStartClick(TObject *Sender) {
 		}
 		else if (RadioButton4->Checked) {
 			StartCounter();
-
+			s_array.MergeSort();
 			elapsed_secs = GetCounter();
 		}
 		else if (RadioButton5->Checked) {
@@ -105,12 +104,12 @@ void __fastcall TForm2::btnStartClick(TObject *Sender) {
 		}
 		else if (RadioButton7->Checked) {
 			StartCounter();
-
+			s_array.RadixSort();
 			elapsed_secs = GetCounter();
 		}
 		else if (RadioButton8->Checked) {
 			StartCounter();
-
+			s_array.SelectionSort();
 			elapsed_secs = GetCounter();
 		}
 		else if (RadioButton9->Checked) {
@@ -120,18 +119,20 @@ void __fastcall TForm2::btnStartClick(TObject *Sender) {
 		}
 		else if (RadioButton10->Checked) {
 			StartCounter();
-
+			s_array.QuickSort();
 			elapsed_secs = GetCounter();
 		}
 		else if (RadioButton11->Checked) {
-			//s_array.ArrayToVector();
+			// s_array.ArrayToVector();
 			StartCounter();
 			s_array.HeapSort();
 			elapsed_secs = GetCounter();
 		}
 
+
 		//
-		labelTime->Caption = FloatToStrF(elapsed_secs, ffFixed, 2, 4) + " \u00B5s";
+		labelTime->Caption = FloatToStrF(elapsed_secs, ffFixed, 2, 4) +
+			" \u00B5s";
 		EditSorted->Text = s_array.TableToString();
 	}
 	catch (...) {
@@ -189,4 +190,5 @@ void __fastcall TForm2::ListBoxTimeDblClick(TObject *Sender) {
 
 	}
 }
+
 // ---------------------------------------------------------------------------

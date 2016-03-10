@@ -7,6 +7,7 @@
 #include <string>
 #include <sstream>
 #include <algorithm>    // std::sort
+#include <stdio.h>
 
 using namespace std;
 
@@ -37,7 +38,7 @@ public:
 	inline void BubbleSort();
 	inline void InsertionSort();
 	inline void MergeSort();
-	inline void CountingSort();
+	inline void CountSort();
 	inline void BucketSort();
 	inline void RadixSort();
 	inline void SelectionSort();
@@ -45,9 +46,15 @@ public:
 	inline void QuickSort();
 	inline void HeapSort();
 
-	void HEAPSORT(int a[], int n);
-	void BUILD_MAX_HEAP(int a[], int n);
-	void MAX_HEAPIFY(int a[], int i, int n);
+private:
+	void merge_sort(int arr1[], int ll, int ul);
+	void merge(int arr1[], int ll1, int ul1, int ll2, int ul2);
+	void countSort(int arr[], int n, int exp);
+	int getMax(int arr[], int n);
+	int pivot(int a[], int first, int last);
+	void swap(int& a, int& b);
+	void swapNoTemp(int& a, int& b);
+	void quickSort(int a[], int first, int last);
 };
 
 Table& Table:: operator++() {
@@ -110,6 +117,31 @@ inline void Table::InsertionSort() {
 	}
 }
 
+inline void Table::SelectionSort() {
+	int pos_min,temp;
+
+	for (int i=0; i < size - 1; i++)
+	{
+	    pos_min = i;//set pos_min to the current index of array
+
+		for (int j=i+1; j < size; j++)
+		{
+
+		if (tab[j] < tab[pos_min])
+				   pos_min=j;
+	//pos_min will keep track of the index that min is in, this is needed when a swap happens
+		}
+
+	//if pos_min no longer equals i than a smaller value must have been found, so a swap must occur
+            if (pos_min != i)
+            {
+                 temp = tab[i];
+				 tab[i] = tab[pos_min];
+				 tab[pos_min] = temp;
+            }
+	}
+}
+
 inline void Table::ShellSort() {
 	int gap, i, j, temp;
 
@@ -128,44 +160,116 @@ inline void Table::ShellSort() {
 			}
 }
 
+void Table::merge(int arr1[], int ll1, int ul1, int ll2, int ul2) {
+	int i = 0, k, ll = ll1;
+	int arr3[100];
+	while (ll1 <= ul1 && ll2 <= ul2) {
+		if (arr1[ll1] < arr1[ll2])
+			arr3[i++] = arr1[ll1++];
+		else
+			arr3[i++] = arr1[ll2++];
+	}
+	while (ll1 <= ul1)
+		arr3[i++] = arr1[ll1++];
+	while (ll2 <= ul2)
+		arr3[i++] = arr1[ll2++];
+	for (k = 0; k < i; k++)
+		arr1[ll++] = arr3[k];
+}
+
+void Table::merge_sort(int arr1[], int ll, int ul) {
+	int mid;
+	if (ll < ul) {
+		mid = (ul + ll) / 2;
+		merge_sort(arr1, ll, mid);
+		merge_sort(arr1, mid + 1, ul);
+		merge(arr1, ll, mid, mid + 1, ul);
+	}
+}
+
+inline void Table::MergeSort() {
+	merge_sort(tab, 0, size - 1);
+}
+
+int Table::getMax(int arr[], int n) {
+	int max = arr[0];
+	for (int i = 1; i < n; i++)
+		if (arr[i] > max)
+			max = arr[i];
+	return max;
+}
+
+void Table::countSort(int arr[], int n, int exp) {
+	int* output = new int[n];
+	int i, count[10] = {0};
+	for (i = 0; i < n; i++)
+		count[(arr[i] / exp) % 10]++;
+	for (i = 1; i < 10; i++)
+		count[i] += count[i - 1];
+	for (i = n - 1; i >= 0; i--) {
+		output[count[(arr[i] / exp) % 10] - 1] = arr[i];
+		count[(arr[i] / exp) % 10]--;
+	}
+	for (i = 0; i < n; i++)
+		arr[i] = output[i];
+
+	delete[]output;
+}
+
+inline void Table::RadixSort() {
+	int m = getMax(tab, size);
+	for (int exp = 1; m / exp > 0; exp *= 10)
+		countSort(tab, size, exp);
+}
+
 inline void Table::BucketSort() {
 
 }
 
-void Table::MAX_HEAPIFY(int a[], int i, int n) {
-	int l, r, largest, loc;
-	l = 2 * i;
-	r = (2 * i + 1);
-	if ((l <= n) && a[l] > a[i])
-		largest = l;
-	else
-		largest = i;
-	if ((r <= n) && (a[r] > a[largest]))
-		largest = r;
-	if (largest != i) {
-		loc = a[i];
-		a[i] = a[largest];
-		a[largest] = loc;
-		MAX_HEAPIFY(a, largest, n);
+inline void Table::QuickSort() {
+	quickSort(tab, 0, size - 1);
+}
+
+void Table::quickSort(int a[], int first, int last) {
+	int pivotElement;
+
+	if (first < last) {
+		pivotElement = pivot(a, first, last);
+		quickSort(a, first, pivotElement - 1);
+		quickSort(a, pivotElement + 1, last);
 	}
 }
 
-void Table::BUILD_MAX_HEAP(int a[], int n) {
-	for (int k = n / 2; k >= 1; k--) {
-		MAX_HEAPIFY(a, k, n);
+int Table::pivot(int a[], int first, int last) {
+	int p = first;
+	int pivotElement = a[first];
+
+	for (int i = first + 1; i <= last; i++) {
+		/* If you want to sort the list in the other order, change "<=" to ">" */
+		if (a[i] <= pivotElement) {
+			p++;
+			swap(a[i], a[p]);
+		}
 	}
+
+	swap(a[p], a[first]);
+
+	return p;
+}
+
+void Table::swap(int& a, int& b) {
+	int temp = a;
+	a = b;
+	b = temp;
+}
+
+void Table::swapNoTemp(int& a, int& b) {
+	a -= b;
+	b += a; // b gets the original value of a
+	a = (b - a); // a gets the original value of b
 }
 
 inline void Table::HeapSort() {
-
-	BUILD_MAX_HEAP(tab, size);
-	int i, temp;
-	for (i = size; i >= 2; i--) {
-		temp = tab[i];
-		tab[i] = tab[1];
-		tab[1] = temp;
-		MAX_HEAPIFY(tab, 1, i - 1);
-	}
 }
 
 #endif
