@@ -10,6 +10,7 @@
 #include <iostream>
 #include <vector>
 #include <string>
+#include <fstream.h> // importowany plik fstream.h
 
 // ---------------------------------------------------------------------------
 #pragma package(smart_init)
@@ -52,8 +53,65 @@ void __fastcall TForm2::Exit1Click(TObject *Sender) {
 }
 
 // ---------------------------------------------------------------------------
-void __fastcall TForm2::btnStartClick(TObject *Sender) {
+void __fastcall TForm2::bSaveTimeClick(TObject *Sender) {
+	String time = FloatToStr(elapsed_secs);
+	int number = ListBoxTime->Items->Count + 1;
+	ListBoxTime->Items->Add((String)number + ". " + time + " \u00B5s");
+}
+
+// ---------------------------------------------------------------------------
+void __fastcall TForm2::bClearClick(TObject *Sender) {
+	ListBoxTime->Items->Clear();
+}
+// ---------------------------------------------------------------------------
+
+void __fastcall TForm2::bClearSortingClick(TObject *Sender) {
+	EditSorted->Clear();
+	EditUnsorted->Clear();
+	EditSorted->Enabled = false;
+}
+
+// ---------------------------------------------------------------------------
+void __fastcall TForm2::About1Click(TObject *Sender) {
+	AnsiString strMessage = "Sorting Algorithms";
+	AnsiString strAuthor = "Author: Rafal Olszewski";
+	AnsiString strVer = "Version: 1.0";
+	AnsiString strWWW = "http://www.github.com/";
+
+	ShowMessage(strMessage + sLineBreak + strAuthor + sLineBreak + strVer +
+		sLineBreak + strWWW);
+}
+
+// ---------------------------------------------------------------------------
+void __fastcall TForm2::ListBoxTimeDblClick(TObject *Sender) {
 	try {
+		String SelectedItemCaption =
+			ListBoxTime->Items->Strings[ListBoxTime->ItemIndex];
+		string GetListItem = UnicodeToString(SelectedItemCaption);
+		const char* str = new char[GetListItem.length() + 1];
+		str = GetListItem.c_str();
+		OpenClipboard(this->WindowHandle);
+		EmptyClipboard();
+		HGLOBAL h = GlobalAlloc(GHND | GMEM_SHARE, GetListItem.length() + 1);
+		strcpy((LPSTR)GlobalLock(h), str);
+		GlobalUnlock(h);
+		SetClipboardData(CF_TEXT, h);
+		CloseClipboard();
+
+		ShowMessage("Copied \"" + SelectedItemCaption + "\" to clipboard");
+	}
+	catch (...) {
+
+	}
+}
+
+// ---------------------------------------------------------------------------
+void __fastcall TForm2::bSortClick(TObject *Sender) {
+	try {
+		if (!EditUnsorted->Text.IsEmpty()) {
+			EditSorted->Enabled = true;
+		}
+
 		string input = UnicodeToString(EditUnsorted->Text);
 
 		vector<long>output;
@@ -94,7 +152,7 @@ void __fastcall TForm2::btnStartClick(TObject *Sender) {
 		}
 		else if (RadioButton5->Checked) {
 			StartCounter();
-
+			s_array.CountingSort();
 			elapsed_secs = GetCounter();
 		}
 		else if (RadioButton6->Checked) {
@@ -123,15 +181,18 @@ void __fastcall TForm2::btnStartClick(TObject *Sender) {
 			elapsed_secs = GetCounter();
 		}
 		else if (RadioButton11->Checked) {
-			// s_array.ArrayToVector();
 			StartCounter();
 			s_array.HeapSort();
 			elapsed_secs = GetCounter();
 		}
-
+		else if (RadioButton12->Checked) {
+			StartCounter();
+			s_array.ExchangeSort();
+			elapsed_secs = GetCounter();
+		}
 
 		//
-		labelTime->Caption = FloatToStrF(elapsed_secs, ffFixed, 2, 4) +
+		labelTime->Caption = FloatToStrF(elapsed_secs, ffFixed, 2, 3) +
 			" \u00B5s";
 		EditSorted->Text = s_array.TableToString();
 	}
@@ -140,55 +201,39 @@ void __fastcall TForm2::btnStartClick(TObject *Sender) {
 }
 
 // ---------------------------------------------------------------------------
-void __fastcall TForm2::bSaveTimeClick(TObject *Sender) {
-	String time = FloatToStr(elapsed_secs);
-	int number = ListBoxTime->Items->Count + 1;
-	ListBoxTime->Items->Add((String)number + ". " + time + " \u00B5s");
-}
-
-// ---------------------------------------------------------------------------
-void __fastcall TForm2::bClearClick(TObject *Sender) {
-	ListBoxTime->Items->Clear();
-}
-// ---------------------------------------------------------------------------
-
-void __fastcall TForm2::bClearSortingClick(TObject *Sender) {
-	EditSorted->Clear();
-	EditUnsorted->Clear();
-}
-
-// ---------------------------------------------------------------------------
-void __fastcall TForm2::About1Click(TObject *Sender) {
-	AnsiString strMessage = "Sorting Algorithms";
-	AnsiString strAuthor = "Author: Rafal Olszewski";
-	AnsiString strVer = "Version: 1.0";
-	AnsiString strWWW = "http://www.github.com/";
-
-	ShowMessage(strMessage + sLineBreak + strAuthor + sLineBreak + strVer +
-		sLineBreak + strWWW);
-}
-
-// ---------------------------------------------------------------------------
-void __fastcall TForm2::ListBoxTimeDblClick(TObject *Sender) {
-	try {
-		String SelectedItemCaption =
-			ListBoxTime->Items->Strings[ListBoxTime->ItemIndex];
-		string GetListItem = UnicodeToString(SelectedItemCaption);
-		const char* str = new char[GetListItem.length() + 1];
-		str = GetListItem.c_str();
-		OpenClipboard(this->WindowHandle);
-		EmptyClipboard();
-		HGLOBAL h = GlobalAlloc(GHND | GMEM_SHARE, GetListItem.length() + 1);
-		strcpy((LPSTR)GlobalLock(h), str);
-		GlobalUnlock(h);
-		SetClipboardData(CF_TEXT, h);
-		CloseClipboard();
-
-		ShowMessage("Copied \"" + SelectedItemCaption + "\" to clipboard");
+void __fastcall TForm2::bSaveClick(TObject *Sender) {
+	if (EditSorted->Text.IsEmpty()) {
+		ShowMessage(
+			"Theres nothing to save.\nEnter numbers and click sort button to obtain data.");
+		return;
 	}
-	catch (...) {
+	char* sorted = new char[EditSorted->Text.Length()];
+	strcpy(sorted, AnsiString(EditSorted->Text).c_str());
+	if (SaveDialog1->Execute()) {
+		ofstream outfile(SaveDialog1->FileName.c_str(), ios::out);
+		if (!outfile) {
+			ShowMessage("There was a problem saving the file.");
+			return;
+		}
 
+		outfile << sorted;
+
+		outfile.close();
+	}
+	delete[]sorted;
+}
+
+// ---------------------------------------------------------------------------
+void __fastcall TForm2::bOpenClick(TObject *Sender) {
+	if (OpenDialog1->Execute()) {
+		ifstream file;
+		file.open(OpenDialog1->FileName.c_str(), ios::in);
+		if (!file) {
+			ShowMessage("There was a problem opening the file.");
+			return;
+		}
+		// file >> openedfile;
+		file.close();
 	}
 }
-
-// ---------------------------------------------------------------------------
+// ---------------------------------------------------------------------------.")

@@ -31,20 +31,21 @@ public:
 
 	Table& operator++();
 	Table operator++(int);
-	void getTab(const char* nap);
+	int* getTab();
 	AnsiString Table::TableToString();
 	void ArrayToVector();
 	inline void Sort();
 	inline void BubbleSort();
 	inline void InsertionSort();
 	inline void MergeSort();
-	inline void CountSort();
+	inline void CountingSort();
 	inline void BucketSort();
 	inline void RadixSort();
 	inline void SelectionSort();
 	inline void ShellSort();
 	inline void QuickSort();
 	inline void HeapSort();
+	inline void ExchangeSort();
 
 private:
 	void merge_sort(int arr1[], int ll, int ul);
@@ -55,6 +56,10 @@ private:
 	void swap(int& a, int& b);
 	void swapNoTemp(int& a, int& b);
 	void quickSort(int a[], int first, int last);
+	void siftDown(int *a, int k, int N);
+	void heapsort(int a[], int N);
+	void sort(int* arr, int len);
+	void findMinMax(int* arr, int len, int& mi, int& mx);
 };
 
 Table& Table:: operator++() {
@@ -69,11 +74,8 @@ Table Table:: operator++(int) {
 	return t;
 }
 
-void Table::getTab(const char* nap) {
-	cout << nap;
-	for (int i = 0; i < size; i++)
-		cout << tab[i] << " ";
-	cout << endl;
+int* Table::getTab() {
+	return tab;
 }
 
 inline AnsiString Table::TableToString() {
@@ -118,27 +120,24 @@ inline void Table::InsertionSort() {
 }
 
 inline void Table::SelectionSort() {
-	int pos_min,temp;
+	int pos_min, temp;
 
-	for (int i=0; i < size - 1; i++)
-	{
-	    pos_min = i;//set pos_min to the current index of array
+	for (int i = 0; i < size - 1; i++) {
+		pos_min = i; // set pos_min to the current index of array
 
-		for (int j=i+1; j < size; j++)
-		{
+		for (int j = i + 1; j < size; j++) {
 
-		if (tab[j] < tab[pos_min])
-				   pos_min=j;
-	//pos_min will keep track of the index that min is in, this is needed when a swap happens
+			if (tab[j] < tab[pos_min])
+				pos_min = j;
+			// pos_min will keep track of the index that min is in, this is needed when a swap happens
 		}
 
-	//if pos_min no longer equals i than a smaller value must have been found, so a swap must occur
-            if (pos_min != i)
-            {
-                 temp = tab[i];
-				 tab[i] = tab[pos_min];
-				 tab[pos_min] = temp;
-            }
+		// if pos_min no longer equals i than a smaller value must have been found, so a swap must occur
+		if (pos_min != i) {
+			temp = tab[i];
+			tab[i] = tab[pos_min];
+			tab[pos_min] = temp;
+		}
 	}
 }
 
@@ -189,6 +188,41 @@ void Table::merge_sort(int arr1[], int ll, int ul) {
 
 inline void Table::MergeSort() {
 	merge_sort(tab, 0, size - 1);
+}
+
+void Table::findMinMax(int* arr, int len, int& mi, int& mx) {
+	mi = INT_MAX;
+	mx = 0;
+	for (int i = 0; i < len; i++) {
+		if (arr[i] > mx)
+			mx = arr[i];
+		if (arr[i] < mi)
+			mi = arr[i];
+	}
+}
+
+void Table::sort(int* arr, int len) {
+	int mi, mx, z = 0;
+	findMinMax(arr, len, mi, mx);
+	int nlen = (mx - mi) + 1;
+	int* temp = new int[nlen];
+	memset(temp, 0, nlen * sizeof(int));
+
+	for (int i = 0; i < len; i++)
+		temp[arr[i] - mi]++;
+
+	for (int i = mi; i <= mx; i++) {
+		while (temp[i - mi]) {
+			arr[z++] = i;
+			temp[i - mi]--;
+		}
+	}
+
+	delete[]temp;
+}
+
+inline void Table::CountingSort() {
+	sort(tab, size);
 }
 
 int Table::getMax(int arr[], int n) {
@@ -269,7 +303,56 @@ void Table::swapNoTemp(int& a, int& b) {
 	a = (b - a); // a gets the original value of b
 }
 
+void Table::heapsort(int a[], int N) {
+	/* heapify */
+	for (int k = N / 2; k >= 0; k--) {
+		siftDown(a, k, N);
+	}
+
+	while (N - 1 > 0) {
+		swap(a[N - 1], a[0]);
+		/* put the heap back in max-heap order */
+		siftDown(a, 0, N - 1);
+		N--;
+	}
+}
+
+void Table::siftDown(int *a, int k, int N) {
+	while (k * 2 + 1 < N) {
+		/* For zero-based arrays, the children are 2*i+1 and 2*i+2 */
+		int child = 2 * k + 1;
+
+		/* get bigger child if there are two children */
+		if ((child + 1 < N) && (a[child] < a[child + 1]))
+			child++;
+
+		if (a[k] < a[child]) { /* out of max-heap order */
+			swap(a[child], a[k]);
+			/* repeat to continue sifting down the child now */
+			k = child;
+		}
+		else
+			return;
+	}
+}
+
 inline void Table::HeapSort() {
+	heapsort(tab, size);
+}
+
+inline void Table::ExchangeSort() {
+	int i, j;
+	int temp; // holding variable
+	int numLength = size;
+	for (i = 0; i < (numLength - 1); i++) { // element to be compared
+		for (j = (i + 1); j < numLength; j++) { // rest of the elements
+			if (tab[i] > tab[j]) { // ascending order
+				temp = tab[i]; // swap
+				tab[i] = tab[j];
+				tab[j] = temp;
+			}
+		}
+	}
 }
 
 #endif

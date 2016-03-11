@@ -1985,7 +1985,7 @@ object Form2: TForm2
     Top = 116
     Width = 113
     Height = 17
-    Caption = 'Count sort'
+    Caption = 'Counting sort'
     TabOrder = 5
   end
   object RadioButton6: TRadioButton
@@ -1994,6 +1994,7 @@ object Form2: TForm2
     Width = 113
     Height = 17
     Caption = 'Bucket sort'
+    Enabled = False
     TabOrder = 6
   end
   object RadioButton7: TRadioButton
@@ -2042,7 +2043,7 @@ object Form2: TForm2
     Width = 242
     Height = 186
     Caption = 'Arrays'
-    TabOrder = 12
+    TabOrder = 13
     object Label1: TLabel
       Left = 11
       Top = 19
@@ -2064,7 +2065,6 @@ object Form2: TForm2
       Height = 21
       Hint = 'Enter numbers separated by commas'
       TabStop = False
-      MaxLength = 40
       ParentShowHint = False
       ShowHint = True
       TabOrder = 0
@@ -2076,6 +2076,7 @@ object Form2: TForm2
       Width = 222
       Height = 21
       Enabled = False
+      ReadOnly = True
       TabOrder = 1
     end
     object bClearSorting: TButton
@@ -2088,13 +2089,31 @@ object Form2: TForm2
       TabStop = False
       OnClick = bClearSortingClick
     end
+    object bSave: TBitBtn
+      Left = 75
+      Top = 149
+      Width = 58
+      Height = 25
+      Caption = 'Save File'
+      TabOrder = 3
+    end
+    object bOpen: TBitBtn
+      Left = 11
+      Top = 149
+      Width = 58
+      Height = 25
+      Caption = 'Open File'
+      Enabled = False
+      TabOrder = 4
+      OnClick = bOpenClick
+    end
   end
   object TGroupBox
     Left = 191
     Top = 192
     Width = 242
     Height = 177
-    TabOrder = 13
+    TabOrder = 14
     object Label3: TLabel
       Left = 152
       Top = 118
@@ -2108,15 +2127,6 @@ object Form2: TForm2
       Width = 3
       Height = 13
     end
-    object btnStart: TButton
-      Left = 151
-      Top = 137
-      Width = 75
-      Height = 25
-      Caption = 'START'
-      TabOrder = 0
-      OnClick = btnStartClick
-    end
     object ListBoxTime: TListBox
       Left = 10
       Top = 12
@@ -2126,7 +2136,7 @@ object Form2: TForm2
       ItemHeight = 13
       ParentShowHint = False
       ShowHint = True
-      TabOrder = 1
+      TabOrder = 0
       OnDblClick = ListBoxTimeDblClick
     end
     object bSaveTime: TButton
@@ -2135,7 +2145,7 @@ object Form2: TForm2
       Width = 75
       Height = 25
       Caption = 'Save time'
-      TabOrder = 2
+      TabOrder = 1
       TabStop = False
       OnClick = bSaveTimeClick
     end
@@ -2145,10 +2155,29 @@ object Form2: TForm2
       Width = 75
       Height = 25
       Caption = 'Clear time'
-      TabOrder = 3
+      TabOrder = 2
       TabStop = False
       OnClick = bClearClick
     end
+    object bSort: TBitBtn
+      Left = 151
+      Top = 137
+      Width = 75
+      Height = 25
+      Caption = 'Sort'
+      Kind = bkOK
+      NumGlyphs = 2
+      TabOrder = 3
+      OnClick = bSortClick
+    end
+  end
+  object RadioButton12: TRadioButton
+    Left = 16
+    Top = 277
+    Width = 113
+    Height = 17
+    Caption = 'Exchange sort'
+    TabOrder = 12
   end
   object MainMenu1: TMainMenu
     Left = 415
@@ -2164,5 +2193,16 @@ object Form2: TForm2
       Caption = 'About'
       OnClick = About1Click
     end
+  end
+  object SaveDialog1: TSaveDialog
+    DefaultExt = 'txt'
+    FileName = 'C:\Users\Rafael\Desktop\s.txt'
+    Filter = 'Sorted Arrays (*.txt)|*.txt|All Files'
+    Left = 279
+    Top = 104
+  end
+  object OpenDialog1: TOpenDialog
+    Left = 215
+    Top = 104
   end
 end
