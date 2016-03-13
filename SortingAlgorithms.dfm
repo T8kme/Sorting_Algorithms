@@ -2053,7 +2053,7 @@ object Form2: TForm2
     end
     object Label2: TLabel
       Left = 11
-      Top = 64
+      Top = 69
       Width = 36
       Height = 13
       Caption = 'Sorted:'
@@ -2062,7 +2062,7 @@ object Form2: TForm2
       Left = 11
       Top = 38
       Width = 222
-      Height = 21
+      Height = 23
       Hint = 'Enter numbers separated by commas'
       TabStop = False
       ParentShowHint = False
@@ -2072,9 +2072,9 @@ object Form2: TForm2
     end
     object EditSorted: TEdit
       Left = 11
-      Top = 83
+      Top = 88
       Width = 222
-      Height = 21
+      Height = 23
       Enabled = False
       ReadOnly = True
       TabOrder = 1
@@ -2096,6 +2096,7 @@ object Form2: TForm2
       Height = 25
       Caption = 'Save File'
       TabOrder = 3
+      OnClick = bSaveClick
     end
     object bOpen: TBitBtn
       Left = 11
@@ -2103,7 +2104,6 @@ object Form2: TForm2
       Width = 58
       Height = 25
       Caption = 'Open File'
-      Enabled = False
       TabOrder = 4
       OnClick = bOpenClick
     end
@@ -2184,6 +2184,14 @@ object Form2: TForm2
     Top = 65535
     object File1: TMenuItem
       Caption = 'File'
+      object Open1: TMenuItem
+        Caption = 'Open...'
+        OnClick = Open1Click
+      end
+      object Save1: TMenuItem
+        Caption = 'Save as...'
+        OnClick = Save1Click
+      end
       object Exit1: TMenuItem
         Caption = 'Exit'
         OnClick = Exit1Click
@@ -2198,11 +2206,11 @@ object Form2: TForm2
     DefaultExt = 'txt'
     FileName = 'C:\Users\Rafael\Desktop\s.txt'
     Filter = 'Sorted Arrays (*.txt)|*.txt|All Files'
-    Left = 279
-    Top = 104
+    Left = 135
+    Top = 64
   end
   object OpenDialog1: TOpenDialog
-    Left = 215
-    Top = 104
+    Left = 135
+    Top = 16
   end
 end

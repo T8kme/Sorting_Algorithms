@@ -10,7 +10,8 @@
 #include <iostream>
 #include <vector>
 #include <string>
-#include <fstream.h> // importowany plik fstream.h
+#include <fstream.h>
+#include <memory>       //for STL auto_ptr class
 
 // ---------------------------------------------------------------------------
 #pragma package(smart_init)
@@ -22,11 +23,8 @@ double elapsed_secs;
 
 void StartCounter() {
 	LARGE_INTEGER li;
-	if (!QueryPerformanceFrequency(&li))
-		cout << "QueryPerformanceFrequency failed!\n";
 
 	PCFreq = double(li.QuadPart) / 1000000.0;
-
 	QueryPerformanceCounter(&li);
 	CounterStart = li.QuadPart;
 }
@@ -73,13 +71,9 @@ void __fastcall TForm2::bClearSortingClick(TObject *Sender) {
 
 // ---------------------------------------------------------------------------
 void __fastcall TForm2::About1Click(TObject *Sender) {
-	AnsiString strMessage = "Sorting Algorithms";
-	AnsiString strAuthor = "Author: Rafal Olszewski";
-	AnsiString strVer = "Version: 1.0";
-	AnsiString strWWW = "http://www.github.com/";
-
-	ShowMessage(strMessage + sLineBreak + strAuthor + sLineBreak + strVer +
-		sLineBreak + strWWW);
+	Application->MessageBox
+		(L"Sorting Algorithms\nAuthor: Rafal Olszewski\nVersion: 1.1\nhttps://github.com/T8kme/",
+		L"About", MB_OK);
 }
 
 // ---------------------------------------------------------------------------
@@ -203,16 +197,17 @@ void __fastcall TForm2::bSortClick(TObject *Sender) {
 // ---------------------------------------------------------------------------
 void __fastcall TForm2::bSaveClick(TObject *Sender) {
 	if (EditSorted->Text.IsEmpty()) {
-		ShowMessage(
-			"Theres nothing to save.\nEnter numbers and click sort button to obtain data.");
+		Application->MessageBox
+			(L"Theres nothing to save.\nEnter numbers and click sort button to obtain data.",
+			L"App Error", IDOK);
 		return;
 	}
-	char* sorted = new char[EditSorted->Text.Length()];
-	strcpy(sorted, AnsiString(EditSorted->Text).c_str());
+	string sorted = UnicodeToString(EditSorted->Text);
 	if (SaveDialog1->Execute()) {
 		ofstream outfile(SaveDialog1->FileName.c_str(), ios::out);
 		if (!outfile) {
-			ShowMessage("There was a problem saving the file.");
+			Application->MessageBox(L"There was a problem saving the file.",
+				L"App Error", IDOK);
 			return;
 		}
 
@@ -220,11 +215,11 @@ void __fastcall TForm2::bSaveClick(TObject *Sender) {
 
 		outfile.close();
 	}
-	delete[]sorted;
 }
 
 // ---------------------------------------------------------------------------
 void __fastcall TForm2::bOpenClick(TObject *Sender) {
+	string input;
 	if (OpenDialog1->Execute()) {
 		ifstream file;
 		file.open(OpenDialog1->FileName.c_str(), ios::in);
@@ -232,8 +227,22 @@ void __fastcall TForm2::bOpenClick(TObject *Sender) {
 			ShowMessage("There was a problem opening the file.");
 			return;
 		}
-		// file >> openedfile;
+		while (!file.eof()) {
+			file >> input;
+		}
 		file.close();
 	}
+	UnicodeString str = input.c_str();
+	EditUnsorted->Text = str;
 }
+
 // ---------------------------------------------------------------------------.")
+void __fastcall TForm2::Open1Click(TObject *Sender) {
+	bOpen->Click();
+}
+// ---------------------------------------------------------------------------
+
+void __fastcall TForm2::Save1Click(TObject *Sender) {
+	bSave->Click();
+}
+// ---------------------------------------------------------------------------

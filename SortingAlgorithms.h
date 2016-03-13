@@ -50,6 +50,8 @@ __published:	// IDE-managed Components
 	TRadioButton *RadioButton12;
 	TOpenDialog *OpenDialog1;
 	TBitBtn *bOpen;
+	TMenuItem *Open1;
+	TMenuItem *Save1;
 	void __fastcall Exit1Click(TObject *Sender);
 	void __fastcall bSaveTimeClick(TObject *Sender);
 	void __fastcall bClearClick(TObject *Sender);
@@ -59,6 +61,8 @@ __published:	// IDE-managed Components
 	void __fastcall bSortClick(TObject *Sender);
 	void __fastcall bSaveClick(TObject *Sender);
 	void __fastcall bOpenClick(TObject *Sender);
+	void __fastcall Open1Click(TObject *Sender);
+	void __fastcall Save1Click(TObject *Sender);
 
 private:	// User declarations
 public:		// User declarations
