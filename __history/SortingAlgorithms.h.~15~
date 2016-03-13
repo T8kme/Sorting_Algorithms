@@ -9,6 +9,10 @@
 #include <Vcl.Forms.hpp>
 #include <Vcl.ExtCtrls.hpp>
 #include <Vcl.Menus.hpp>
+#include <Vcl.Dialogs.hpp>
+#include <VCLTee.TeCanvas.hpp>
+#include <VCLTee.TeeEdiGrad.hpp>
+#include <Vcl.Buttons.hpp>
 //---------------------------------------------------------------------------
 class TForm2 : public TForm
 {
@@ -26,7 +30,6 @@ __published:	// IDE-managed Components
 	TRadioButton *RadioButton10;
 	TRadioButton *RadioButton11;
 	TGroupBox *GroupBox1;
-	TButton *btnStart;
 	TEdit *EditUnsorted;
 	TEdit *EditSorted;
 	TLabel *Label1;
@@ -41,13 +44,25 @@ __published:	// IDE-managed Components
 	TMenuItem *About1;
 	TMenuItem *Exit1;
 	TButton *bClearSorting;
+	TBitBtn *bSort;
+	TBitBtn *bSave;
+	TSaveDialog *SaveDialog1;
+	TRadioButton *RadioButton12;
+	TOpenDialog *OpenDialog1;
+	TBitBtn *bOpen;
+	TMenuItem *Open1;
+	TMenuItem *Save1;
 	void __fastcall Exit1Click(TObject *Sender);
-	void __fastcall btnStartClick(TObject *Sender);
 	void __fastcall bSaveTimeClick(TObject *Sender);
 	void __fastcall bClearClick(TObject *Sender);
 	void __fastcall bClearSortingClick(TObject *Sender);
 	void __fastcall About1Click(TObject *Sender);
 	void __fastcall ListBoxTimeDblClick(TObject *Sender);
+	void __fastcall bSortClick(TObject *Sender);
+	void __fastcall bSaveClick(TObject *Sender);
+	void __fastcall bOpenClick(TObject *Sender);
+	void __fastcall Open1Click(TObject *Sender);
+	void __fastcall Save1Click(TObject *Sender);
 
 private:	// User declarations
 public:		// User declarations

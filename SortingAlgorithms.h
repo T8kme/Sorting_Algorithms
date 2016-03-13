@@ -52,6 +52,10 @@ __published:	// IDE-managed Components
 	TBitBtn *bOpen;
 	TMenuItem *Open1;
 	TMenuItem *Save1;
+	TMenuItem *Help1;
+	TMenuItem *Datainput1;
+	TMenuItem *Savedtime1;
+	TMenuItem *GitHub1;
 	void __fastcall Exit1Click(TObject *Sender);
 	void __fastcall bSaveTimeClick(TObject *Sender);
 	void __fastcall bClearClick(TObject *Sender);
@@ -63,6 +67,9 @@ __published:	// IDE-managed Components
 	void __fastcall bOpenClick(TObject *Sender);
 	void __fastcall Open1Click(TObject *Sender);
 	void __fastcall Save1Click(TObject *Sender);
+	void __fastcall Datainput1Click(TObject *Sender);
+	void __fastcall Savedtime1Click(TObject *Sender);
+	void __fastcall GitHub1Click(TObject *Sender);
 
 private:	// User declarations
 public:		// User declarations

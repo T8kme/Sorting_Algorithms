@@ -2062,7 +2062,7 @@ object Form2: TForm2
       Left = 11
       Top = 38
       Width = 222
-      Height = 23
+      Height = 21
       Hint = 'Enter numbers separated by commas'
       TabStop = False
       ParentShowHint = False
@@ -2074,7 +2074,7 @@ object Form2: TForm2
       Left = 11
       Top = 88
       Width = 222
-      Height = 23
+      Height = 21
       Enabled = False
       ReadOnly = True
       TabOrder = 1
@@ -2200,6 +2200,21 @@ object Form2: TForm2
     object About1: TMenuItem
       Caption = 'About'
       OnClick = About1Click
+    end
+    object Help1: TMenuItem
+      Caption = 'Help'
+      object Datainput1: TMenuItem
+        Caption = 'Data input'
+        OnClick = Datainput1Click
+      end
+      object Savedtime1: TMenuItem
+        Caption = 'Saved time'
+        OnClick = Savedtime1Click
+      end
+      object GitHub1: TMenuItem
+        Caption = 'GitHub'
+        OnClick = GitHub1Click
+      end
     end
   end
   object SaveDialog1: TSaveDialog

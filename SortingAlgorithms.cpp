@@ -245,4 +245,23 @@ void __fastcall TForm2::Open1Click(TObject *Sender) {
 void __fastcall TForm2::Save1Click(TObject *Sender) {
 	bSave->Click();
 }
+
+// ---------------------------------------------------------------------------
+void __fastcall TForm2::Datainput1Click(TObject *Sender) {
+	Application->MessageBox
+		(L"Enter numbers in unsorted box separated by commas\nor use \"Open File\" button and load numbers from file.\nFormat should be x,y,z",
+		L"Data Input Help", IDOK);
+}
+// ---------------------------------------------------------------------------
+
+void __fastcall TForm2::Savedtime1Click(TObject *Sender) {
+	Application->MessageBox
+		(L"Click \"Save File\" button to write sorted array in a file\nif you do not specify a unique file name, the data will be overwritten",
+		L"Data Input Help", IDOK);
+}
+
+// ---------------------------------------------------------------------------
+void __fastcall TForm2::GitHub1Click(TObject *Sender) {
+	ShellExecuteA(0, "open" , "https://github.com/T8kme/Sorting_Algorithms", NULL, NULL, SW_SHOWNORMAL); //
+	}
 // ---------------------------------------------------------------------------
