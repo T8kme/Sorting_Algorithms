@@ -1,10 +1,10 @@
 object Form2: TForm2
   Left = 0
   Top = 0
-  AutoSize = True
+  BorderStyle = bsSingle
   Caption = 'Sorting Algorithms'
-  ClientHeight = 369
-  ClientWidth = 433
+  ClientHeight = 374
+  ClientWidth = 689
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
@@ -1939,109 +1939,109 @@ object Form2: TForm2
   PixelsPerInch = 96
   TextHeight = 13
   object RadioGroup1: TRadioGroup
-    Left = 0
+    Left = 8
     Top = 0
-    Width = 185
+    Width = 137
     Height = 369
     Caption = 'Sorting method:'
-    TabOrder = 0
+    TabOrder = 12
   end
   object RadioButton1: TRadioButton
     Left = 16
-    Top = 24
+    Top = 21
     Width = 113
     Height = 17
     Caption = 'sort() function'
     Checked = True
-    TabOrder = 1
+    TabOrder = 0
     TabStop = True
   end
   object RadioButton2: TRadioButton
     Left = 16
-    Top = 47
+    Top = 44
     Width = 113
     Height = 17
     Caption = 'Bubble sort'
-    TabOrder = 2
+    TabOrder = 1
   end
   object RadioButton3: TRadioButton
     Left = 16
-    Top = 70
+    Top = 67
     Width = 113
     Height = 17
     Caption = 'Insertion sort'
-    TabOrder = 3
+    TabOrder = 2
   end
   object RadioButton4: TRadioButton
     Left = 16
-    Top = 93
+    Top = 90
     Width = 113
     Height = 17
     Caption = 'Merge sort'
-    TabOrder = 4
+    TabOrder = 3
   end
   object RadioButton5: TRadioButton
     Left = 16
-    Top = 116
+    Top = 113
     Width = 113
     Height = 17
     Caption = 'Counting sort'
-    TabOrder = 5
+    TabOrder = 4
   end
   object RadioButton6: TRadioButton
     Left = 16
-    Top = 139
+    Top = 136
     Width = 113
     Height = 17
     Caption = 'Bucket sort'
     Enabled = False
-    TabOrder = 6
+    TabOrder = 5
   end
   object RadioButton7: TRadioButton
     Left = 16
-    Top = 162
+    Top = 159
     Width = 113
     Height = 17
     Caption = 'Radix sort'
-    TabOrder = 7
+    TabOrder = 6
   end
   object RadioButton8: TRadioButton
     Left = 16
-    Top = 185
+    Top = 182
     Width = 113
     Height = 17
     Caption = 'Selection sort'
-    TabOrder = 8
+    TabOrder = 7
   end
   object RadioButton9: TRadioButton
     Left = 16
-    Top = 208
+    Top = 205
     Width = 113
     Height = 17
     Caption = 'Shell sort'
-    TabOrder = 9
+    TabOrder = 8
   end
   object RadioButton10: TRadioButton
     Left = 16
-    Top = 231
+    Top = 228
     Width = 113
     Height = 17
     Caption = 'Quicksort'
-    TabOrder = 10
+    TabOrder = 9
   end
   object RadioButton11: TRadioButton
     Left = 16
-    Top = 254
+    Top = 251
     Width = 113
     Height = 17
     Caption = 'Heap sort'
-    TabOrder = 11
+    TabOrder = 10
   end
   object GroupBox1: TGroupBox
-    Left = 191
+    Left = 147
     Top = 0
-    Width = 242
-    Height = 186
+    Width = 266
+    Height = 369
     Caption = 'Arrays'
     TabOrder = 13
     object Label1: TLabel
@@ -2053,45 +2053,23 @@ object Form2: TForm2
     end
     object Label2: TLabel
       Left = 11
-      Top = 69
+      Top = 174
       Width = 36
       Height = 13
       Caption = 'Sorted:'
     end
-    object EditUnsorted: TEdit
-      Left = 11
-      Top = 38
-      Width = 222
-      Height = 21
-      Hint = 'Enter numbers separated by commas'
-      TabStop = False
-      ParentShowHint = False
-      ShowHint = True
-      TabOrder = 0
-      TextHint = 'Enter numbers separated by commas'
-    end
-    object EditSorted: TEdit
-      Left = 11
-      Top = 88
-      Width = 222
-      Height = 21
-      Enabled = False
-      ReadOnly = True
-      TabOrder = 1
-    end
     object bClearSorting: TButton
-      Left = 151
-      Top = 149
+      Left = 182
+      Top = 333
       Width = 75
       Height = 25
       Caption = 'Clear data'
-      TabOrder = 2
-      TabStop = False
+      TabOrder = 4
       OnClick = bClearSortingClick
     end
     object bSave: TBitBtn
-      Left = 75
-      Top = 149
+      Left = 76
+      Top = 333
       Width = 58
       Height = 25
       Caption = 'Save File'
@@ -2100,38 +2078,75 @@ object Form2: TForm2
     end
     object bOpen: TBitBtn
       Left = 11
-      Top = 149
+      Top = 333
       Width = 58
       Height = 25
       Caption = 'Open File'
-      TabOrder = 4
+      TabOrder = 2
       OnClick = bOpenClick
+    end
+    object EditSorted: TMemo
+      Left = 11
+      Top = 193
+      Width = 246
+      Height = 130
+      Enabled = False
+      ParentShowHint = False
+      ReadOnly = True
+      ShowHint = False
+      TabOrder = 1
+      WantReturns = False
+    end
+    object EditUnsorted: TMemo
+      Left = 11
+      Top = 37
+      Width = 246
+      Height = 130
+      Hint = 'Enter numbers separated by commas'
+      ParentShowHint = False
+      ShowHint = True
+      TabOrder = 0
+      WantReturns = False
     end
   end
   object TGroupBox
-    Left = 191
-    Top = 192
-    Width = 242
-    Height = 177
+    Left = 416
+    Top = 0
+    Width = 266
+    Height = 369
+    Caption = 'Time'
     TabOrder = 14
     object Label3: TLabel
-      Left = 152
-      Top = 118
+      Left = 176
+      Top = 289
       Width = 26
       Height = 13
       Caption = 'Time:'
     end
     object labelTime: TLabel
-      Left = 184
-      Top = 118
+      Left = 208
+      Top = 289
       Width = 3
       Height = 13
     end
+    object TLabel
+      Left = 16
+      Top = 18
+      Width = 3
+      Height = 13
+    end
+    object Label4: TLabel
+      Left = 10
+      Top = 19
+      Width = 73
+      Height = 13
+      Caption = 'Saved time list:'
+    end
     object ListBoxTime: TListBox
       Left = 10
-      Top = 12
-      Width = 135
-      Height = 149
+      Top = 37
+      Width = 160
+      Height = 308
       Hint = 'Double-click copy to the clipboard'
       ItemHeight = 13
       ParentShowHint = False
@@ -2140,30 +2155,28 @@ object Form2: TForm2
       OnDblClick = ListBoxTimeDblClick
     end
     object bSaveTime: TButton
-      Left = 152
-      Top = 8
+      Left = 176
+      Top = 17
       Width = 75
       Height = 25
       Caption = 'Save time'
       TabOrder = 1
-      TabStop = False
       OnClick = bSaveTimeClick
     end
     object bClear: TButton
-      Left = 152
-      Top = 39
+      Left = 176
+      Top = 48
       Width = 75
       Height = 25
       Caption = 'Clear time'
       TabOrder = 2
-      TabStop = False
       OnClick = bClearClick
     end
     object bSort: TBitBtn
-      Left = 151
-      Top = 137
+      Left = 176
+      Top = 308
       Width = 75
-      Height = 25
+      Height = 50
       Caption = 'Sort'
       Kind = bkOK
       NumGlyphs = 2
@@ -2173,15 +2186,15 @@ object Form2: TForm2
   end
   object RadioButton12: TRadioButton
     Left = 16
-    Top = 277
+    Top = 274
     Width = 113
     Height = 17
     Caption = 'Exchange sort'
-    TabOrder = 12
+    TabOrder = 11
   end
   object MainMenu1: TMainMenu
-    Left = 415
-    Top = 65535
+    Left = 615
+    Top = 84
     object File1: TMenuItem
       Caption = 'File'
       object Open1: TMenuItem
@@ -2221,11 +2234,11 @@ object Form2: TForm2
     DefaultExt = 'txt'
     FileName = 'C:\Users\Rafael\Desktop\s.txt'
     Filter = 'Sorted Arrays (*.txt)|*.txt|All Files'
-    Left = 135
-    Top = 64
+    Left = 615
+    Top = 181
   end
   object OpenDialog1: TOpenDialog
-    Left = 135
-    Top = 16
+    Left = 615
+    Top = 133
   end
 end

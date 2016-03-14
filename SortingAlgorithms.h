@@ -30,8 +30,6 @@ __published:	// IDE-managed Components
 	TRadioButton *RadioButton10;
 	TRadioButton *RadioButton11;
 	TGroupBox *GroupBox1;
-	TEdit *EditUnsorted;
-	TEdit *EditSorted;
 	TLabel *Label1;
 	TLabel *Label2;
 	TListBox *ListBoxTime;
@@ -56,6 +54,9 @@ __published:	// IDE-managed Components
 	TMenuItem *Datainput1;
 	TMenuItem *Savedtime1;
 	TMenuItem *GitHub1;
+	TMemo *EditSorted;
+	TMemo *EditUnsorted;
+	TLabel *Label4;
 	void __fastcall Exit1Click(TObject *Sender);
 	void __fastcall bSaveTimeClick(TObject *Sender);
 	void __fastcall bClearClick(TObject *Sender);

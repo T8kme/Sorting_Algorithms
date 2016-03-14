@@ -9,7 +9,6 @@
 #include <windows.h>
 #include <iostream>
 #include <vector>
-#include <string>
 #include <fstream.h>
 #include <memory>       //for STL auto_ptr class
 
@@ -186,8 +185,7 @@ void __fastcall TForm2::bSortClick(TObject *Sender) {
 		}
 
 		//
-		labelTime->Caption = FloatToStrF(elapsed_secs, ffFixed, 2, 3) +
-			" \u00B5s";
+		labelTime->Caption = FloatToStrF(elapsed_secs, ffFixed, 2, 4) + " \u00B5s";
 		EditSorted->Text = s_array.TableToString();
 	}
 	catch (...) {
