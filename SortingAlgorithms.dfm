@@ -2058,13 +2058,27 @@ object Form2: TForm2
       Height = 13
       Caption = 'Sorted:'
     end
+    object labelElements: TLabel
+      Left = 240
+      Top = 19
+      Width = 6
+      Height = 13
+      Caption = '0'
+    end
+    object Label6: TLabel
+      Left = 134
+      Top = 19
+      Width = 100
+      Height = 13
+      Caption = 'Number of elements:'
+    end
     object bClearSorting: TButton
       Left = 182
       Top = 333
       Width = 75
       Height = 25
       Caption = 'Clear data'
-      TabOrder = 4
+      TabOrder = 2
       OnClick = bClearSortingClick
     end
     object bSave: TBitBtn
@@ -2073,7 +2087,7 @@ object Form2: TForm2
       Width = 58
       Height = 25
       Caption = 'Save File'
-      TabOrder = 3
+      TabOrder = 1
       OnClick = bSaveClick
     end
     object bOpen: TBitBtn
@@ -2082,31 +2096,8 @@ object Form2: TForm2
       Width = 58
       Height = 25
       Caption = 'Open File'
-      TabOrder = 2
-      OnClick = bOpenClick
-    end
-    object EditSorted: TMemo
-      Left = 11
-      Top = 193
-      Width = 246
-      Height = 130
-      Enabled = False
-      ParentShowHint = False
-      ReadOnly = True
-      ShowHint = False
-      TabOrder = 1
-      WantReturns = False
-    end
-    object EditUnsorted: TMemo
-      Left = 11
-      Top = 37
-      Width = 246
-      Height = 130
-      Hint = 'Enter numbers separated by commas'
-      ParentShowHint = False
-      ShowHint = True
       TabOrder = 0
-      WantReturns = False
+      OnClick = bOpenClick
     end
   end
   object TGroupBox
@@ -2191,6 +2182,39 @@ object Form2: TForm2
     Height = 17
     Caption = 'Exchange sort'
     TabOrder = 11
+  end
+  object EditUnsorted: TRichEdit
+    Left = 158
+    Top = 38
+    Width = 246
+    Height = 130
+    Hint = 'Enter numbers separated by commas'
+    Font.Charset = EASTEUROPE_CHARSET
+    Font.Color = clWindowText
+    Font.Height = -11
+    Font.Name = 'Tahoma'
+    Font.Style = []
+    ParentFont = False
+    ParentShowHint = False
+    ShowHint = True
+    TabOrder = 15
+  end
+  object EditSorted: TRichEdit
+    Left = 158
+    Top = 194
+    Width = 246
+    Height = 130
+    Enabled = False
+    Font.Charset = EASTEUROPE_CHARSET
+    Font.Color = clWindowText
+    Font.Height = -11
+    Font.Name = 'Tahoma'
+    Font.Style = []
+    ParentFont = False
+    ParentShowHint = False
+    ReadOnly = True
+    ShowHint = False
+    TabOrder = 16
   end
   object MainMenu1: TMainMenu
     Left = 615

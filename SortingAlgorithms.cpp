@@ -23,7 +23,7 @@ double elapsed_secs;
 void StartCounter() {
 	LARGE_INTEGER li;
 
-	PCFreq = double(li.QuadPart) / 1000000.0;
+	PCFreq = double(li.QuadPart) / 1000000000000.0; // 10^-12 (piko)
 	QueryPerformanceCounter(&li);
 	CounterStart = li.QuadPart;
 }
@@ -185,8 +185,26 @@ void __fastcall TForm2::bSortClick(TObject *Sender) {
 		}
 
 		//
-		labelTime->Caption = FloatToStrF(elapsed_secs, ffFixed, 2, 4) + " \u00B5s";
+		String unitChar;
+		if (elapsed_secs > 0.000000001) {
+		elapsed_secs *= 1000;
+			unitChar = "ns"
+		}
+		else if (elapsed_secs > 0.000001) {
+			unitChar = "\u00B5s"
+			elapsed_secs *= 1000000;
+		}
+		else if (elapsed_secs > 0.001) {
+		elapsed_secs *= 1000000000;
+			   unitChar = "ms"
+			 }
+					else if (elapsed_secs > 0.1) {
+					elapsed_secs *= 1000000000000;
+			   unitChar = "s"
+			 }
+		labelTime->Caption = FloatToStrF(elapsed_secs, ffFixed, 2, 4) + " " + unitChar;
 		EditSorted->Text = s_array.TableToString();
+		labelElements->Caption = IntToStr(s_array.getSize());
 	}
 	catch (...) {
 	}
@@ -260,6 +278,7 @@ void __fastcall TForm2::Savedtime1Click(TObject *Sender) {
 
 // ---------------------------------------------------------------------------
 void __fastcall TForm2::GitHub1Click(TObject *Sender) {
-	ShellExecuteA(0, "open" , "https://github.com/T8kme/Sorting_Algorithms", NULL, NULL, SW_SHOWNORMAL); //
-	}
+	ShellExecuteA(0, "open", "https://github.com/T8kme/Sorting_Algorithms",
+		NULL, NULL, SW_SHOWNORMAL); //
+}
 // ---------------------------------------------------------------------------

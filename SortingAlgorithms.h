@@ -13,6 +13,7 @@
 #include <VCLTee.TeCanvas.hpp>
 #include <VCLTee.TeeEdiGrad.hpp>
 #include <Vcl.Buttons.hpp>
+#include <Vcl.ComCtrls.hpp>
 //---------------------------------------------------------------------------
 class TForm2 : public TForm
 {
@@ -54,9 +55,11 @@ __published:	// IDE-managed Components
 	TMenuItem *Datainput1;
 	TMenuItem *Savedtime1;
 	TMenuItem *GitHub1;
-	TMemo *EditSorted;
-	TMemo *EditUnsorted;
 	TLabel *Label4;
+	TRichEdit *EditUnsorted;
+	TRichEdit *EditSorted;
+	TLabel *labelElements;
+	TLabel *Label6;
 	void __fastcall Exit1Click(TObject *Sender);
 	void __fastcall bSaveTimeClick(TObject *Sender);
 	void __fastcall bClearClick(TObject *Sender);

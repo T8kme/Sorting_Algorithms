@@ -94,9 +94,6 @@ Coordinates=151,213,46,51
 [bSaveTime]
 Coordinates=33,213,68,51
 
-[EditSorted]
-Coordinates=200,71,66,51
-
 [bOpen]
 Coordinates=103,1,46,51
 
@@ -119,5 +116,5 @@ Coordinates=562,209,81,33
 Coordinates=562,261,67,33
 
 []
-Coordinates=35,124,40,51
+Coordinates=200,71,66,51
 
